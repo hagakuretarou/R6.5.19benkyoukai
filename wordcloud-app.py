@@ -13,7 +13,7 @@ def nouns_maker(text):
 st.sidebar.title("config")
 width = st.sidebar.slider("width",0,1200,800,10)
 height = st.sidebar.slider("height",0,1200,500,10)
-st.sidebar.selectbox("てーま",["PuBuGn","gist_heat","cubehelix"])
+theme = st.sidebar.selectbox("てーま",["PuBuGn","gist_heat","cubehelix"])
 omit_words = st.sidebar.text_input("除外したいワードをスペース区切りで入れてね")
 omit_list = omit_words.split(" ")
 st.title("Wordcloud Maker")
@@ -22,7 +22,7 @@ text = st.text_area("入力欄",placeholder="ここにテキストを入力し�
 if st.button("作成"):
     nouns = nouns_maker(text)
     wc = WordCloud(width=width,height=height,font_path="ipaexg.ttf",
-                   collocations=False,colormap="PuBuGn")
+                   collocations=False,colormap=theme)
     wc.generate(nouns)
     wc.to_file("test.png")
     st.image("test.png")
